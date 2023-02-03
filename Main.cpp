@@ -132,20 +132,20 @@ public:
 		cin  >> this->model;
 		cout << endl;
 
-		GCard = new GraphCard();
-		mice = new Mouse();
-		print = new Printer();
+		GCard = nullptr;
+		mice = nullptr;
+		print = nullptr;
 	}
-	Notebook(int fake)
+	Notebook(GraphCard* objGCard, Mouse* objMouse, Printer* objPrinter )
 	{
 		cout << "Enter model of the notebook: ";
 		std::cin >> this->model;
 		this->proc  .InputDataProc();
 		this->ram   .InputDataRAM();
 		this->wcam  .InputDataWebCam();
-		GCard = new GraphCard(0);
-		mice = new Mouse(0);
-		print = new Printer(0);
+		GCard = objGCard;
+		mice = objMouse;
+		print = objPrinter;
 	}
 	void OutputNotebook()
 	{
@@ -297,8 +297,11 @@ private:
 };
 int main()
 {
-	Notebook notebook;
+	GraphCard* Gcard = new GraphCard(0);
+	Mouse* mice = new Mouse(0);
+	Printer* print = new Printer(0);
+	Notebook notebook(Gcard, mice, print);
 	notebook.OutputNotebook();
-	system("pause");
+
 	return 0;
 }
